@@ -1,0 +1,123 @@
+definitions:
+  models.Items:
+    properties:
+      description:
+        type: string
+      itemCode:
+        type: integer
+      itemID:
+        type: integer
+      orderID:
+        type: integer
+      quantity:
+        type: integer
+    type: object
+  models.Orders:
+    properties:
+      customerName:
+        type: string
+      items:
+        items:
+          $ref: '#/definitions/models.Items'
+        type: array
+      orderID:
+        type: integer
+      orderedAt:
+        type: string
+    type: object
+host: localhost:8080/orders/
+info:
+  contact:
+    email: gocendra123@gmail.com
+    name: Aditya Gocendra
+  description: This is assignment 2 hacktiv8.
+  title: Orders API
+  version: "1.0"
+paths:
+  /orders:
+    get:
+      consumes:
+      - application/json
+      description: Reading all data with no params
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Orders'
+      summary: Read All Order Data
+      tags:
+      - order
+    post:
+      consumes:
+      - application/json
+      description: 'Note : To create order data, you need to fill in some fields,
+        forget the [OrderID, OrderedAt, ItemID] fields because they will be filled
+        automatically by the system'
+      parameters:
+      - description: create order
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Orders'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Orders'
+      summary: Create Order Data
+      tags:
+      - order
+  /orders/{order_id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete data order with param[OrderID]
+      parameters:
+      - description: order_id
+        in: path
+        name: order_id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Orders'
+      summary: Delete Order Data
+      tags:
+      - order
+    put:
+      consumes:
+      - application/json
+      description: 'Note : To change the order data, you need to fill in some fields,
+        and forget about [OrderedAt]'
+      parameters:
+      - description: order_id
+        in: path
+        name: order_id
+        required: true
+        type: string
+      - description: update order
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/models.Orders'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/models.Orders'
+      summary: Update Order Data
+      tags:
+      - order
+swagger: "2.0"

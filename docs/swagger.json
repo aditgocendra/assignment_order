@@ -1,0 +1,183 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is assignment 2 hacktiv8.",
+        "title": "Orders API",
+        "contact": {
+            "name": "Aditya Gocendra",
+            "email": "gocendra123@gmail.com"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080/orders/",
+    "paths": {
+        "/orders": {
+            "get": {
+                "description": "Reading all data with no params",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "Read All Order Data",
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Orders"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Note : To create order data, you need to fill in some fields, forget the [OrderID, OrderedAt, ItemID] fields because they will be filled automatically by the system",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "Create Order Data",
+                "parameters": [
+                    {
+                        "description": "create order",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Orders"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Orders"
+                        }
+                    }
+                }
+            }
+        },
+        "/orders/{order_id}": {
+            "put": {
+                "description": "Note : To change the order data, you need to fill in some fields, and forget about [OrderedAt]",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "Update Order Data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "order_id",
+                        "name": "order_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "update order",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Orders"
+                        }
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Orders"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Delete data order with param[OrderID]",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "order"
+                ],
+                "summary": "Delete Order Data",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "order_id",
+                        "name": "order_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/models.Orders"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.Items": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string"
+                },
+                "itemCode": {
+                    "type": "integer"
+                },
+                "itemID": {
+                    "type": "integer"
+                },
+                "orderID": {
+                    "type": "integer"
+                },
+                "quantity": {
+                    "type": "integer"
+                }
+            }
+        },
+        "models.Orders": {
+            "type": "object",
+            "properties": {
+                "customerName": {
+                    "type": "string"
+                },
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Items"
+                    }
+                },
+                "orderID": {
+                    "type": "integer"
+                },
+                "orderedAt": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
