@@ -3,6 +3,7 @@ package main
 import (
 	"assignment_order/database"
 	"assignment_order/router"
+	"os"
 )
 
 // @title       Orders API
@@ -17,5 +18,5 @@ import (
 func main() {
 	database.StartDB()
 
-	router.StartServer().Run(":8080")
+	router.StartServer().Run(":" + os.Getenv("PORT"))
 }

@@ -4,17 +4,26 @@ import (
 	"assignment_order/models"
 	"fmt"
 	"log"
+	"os"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 var (
-	host     = "localhost"
-	user     = "postgres"
-	password = "aditgocendra"
-	dbPort     = "5432"
-	dbName   = "orders_by"
+	// host     = "localhost"
+	// user     = "postgres"
+	// password = "aditgocendra"
+	// dbPort     = "5432"
+	// dbName   = "orders_by"
+	// db       *gorm.DB
+	// err      error
+
+	host     = os.Getenv("PGHOST")
+	user     = os.Getenv("PGUSER")
+	password = os.Getenv("PGPASSWORD")
+	dbPort   = os.Getenv("PGPORT")
+	dbName   = os.Getenv("PGDATABASE")
 	db       *gorm.DB
 	err      error
 )
